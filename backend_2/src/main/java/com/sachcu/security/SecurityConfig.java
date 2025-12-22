@@ -25,8 +25,8 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable())
-            .sessionManagement(session ->
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .sessionManagement(sess ->
+                sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
 
             .authorizeHttpRequests(auth -> auth
@@ -41,10 +41,18 @@ public class SecurityConfig {
                 ).permitAll()
 
                 // ===== ADMIN =====
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/admin/**")
+                    .hasAuthority("ADMIN")
 
                 // ===== USER =====
-                .requestMatchers("/api/**").authenticated()
+                .requestMatchers(
+                        "/api/posts/**",
+                        "/api/my-posts/**",
+                        "/api/users/**"
+                ).hasAuthority("USER")
+
+                // ===== CÒN LẠI =====
+                .anyRequest().authenticated()
             )
 
             .addFilterBefore(
