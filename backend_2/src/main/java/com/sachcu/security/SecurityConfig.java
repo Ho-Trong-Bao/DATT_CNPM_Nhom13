@@ -41,24 +41,15 @@ public class SecurityConfig {
                 // ===================== PUBLIC APIs =====================
                 .requestMatchers(
                         "/",
-<<<<<<< HEAD
                         "/auth/**",
                         "/images/**",          // GET public
                         "/books/**",           // public GET
                         "/categories/**",      // public GET
                         "/posts/{postID}",
-=======
-                        "/api/auth/**",              // register, login, admin login
-                        "/api/books/**",             // books, search, province
-                        "/api/categories/**",        // get all categories
-                        "/api/posts/*",              // xem chi tiết bài đăng (public)
-                        "/api/images/**",            // xem ảnh
->>>>>>> be78f0e4b9a14eab5fb0b0be3dd3bd6dc15e452e
                         "/swagger-ui/**",
                         "/v3/api-docs/**"
                 ).permitAll()
 
-<<<<<<< HEAD
                 // ===== USER =====
                 .requestMatchers(
                         "/my-post/**",
@@ -80,23 +71,6 @@ public class SecurityConfig {
                 ).hasRole("ADMIN")
 
                 // mặc định: yêu cầu đăng nhập
-=======
-                // ===================== USER APIs =====================
-                .requestMatchers(
-                        "/api/posts",                        // đăng bài
-                        "/api/my-posts/**",                  // xem/sửa/xóa bài của tôi
-                        "/api/users/**",                     // thông tin user
-                        "/api/images/upload",                // upload ảnh
-                        "/api/images/upload-multiple"
-                ).hasRole("USER")
-
-                // ===================== ADMIN APIs =====================
-                .requestMatchers(
-                        "/api/admin/**"                      // tất cả API admin
-                ).hasRole("ADMIN")
-
-                // ===================== OTHER =====================
->>>>>>> be78f0e4b9a14eab5fb0b0be3dd3bd6dc15e452e
                 .anyRequest().authenticated()
             )
 
@@ -115,10 +89,6 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOrigins(List.of(
-                "http://localhost:3000",
-                "http://localhost:5173",
-                "http://127.0.0.1:5500",
-                "http://127.0.0.1:5501",
                 "https://sachcutheokhuvuc.netlify.app"
         ));
 
